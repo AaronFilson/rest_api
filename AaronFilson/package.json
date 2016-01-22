@@ -1,0 +1,41 @@
+{
+  "name": "rest_api_2r",
+  "version": "0.1.0",
+  "description": "Two resource assignment",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.1.1",
+    "gulp-util": "^3.0.7",
+    "gulp-mocha": "^2.2.0",
+    "body-parser": "^1.14.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.14.2",
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.1.1",
+    "gulp-mocha": "^2.2.0",
+    "gulp-util": "^3.0.7",
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/**test.js"
+  },
+  "keywords": [
+    "basic",
+    "rest",
+    "resource",
+    "mongo",
+    "api"
+  ],
+  "author": "Aaron Filson",
+  "license": "MIT"
+}
