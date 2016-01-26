@@ -1,7 +1,7 @@
 db/**
 node_modules
 node_modules/**
-**/node_modules/**
+AaronFilson/node_modules/**
 **/node_modules
 
 # Compiled source #
