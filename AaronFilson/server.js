@@ -3,7 +3,7 @@ const app = module.exports = exports = express();
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/mix_dev');
 
-const mixRouter = require(__dirname + '/routes/mix_routes');
+const mixRouter = require(__dirname + '/routes/mixRouter');
 
 app.use('/api', mixRouter);
 

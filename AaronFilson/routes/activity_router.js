@@ -1,11 +1,10 @@
 const express = require('express');
 const jsonParser = require('body-parser').json();
-const activity = require(__dirname + '/../models/activity');
-const handleDBError = require(__dirname + '/../lib/handle_db_error');
-
+const Activity = require(__dirname + '/../models/activity');
+const handleDBError = require(__dirname + '/../lib/handleDBError');
 var activityRouter = module.exports = exports = express.Router();
 
-activityRouter.get('/activities', (req, res) => {
+activityRouter.get('/', (req, res) => {
   Activity.find({}, (err, data) => {
     if (err) return handleDBError(err, res);
 
@@ -13,7 +12,7 @@ activityRouter.get('/activities', (req, res) => {
   });
 });
 
-activityRouter.post('/activities', jsonParser, (req, res) => {
+activityRouter.post('/', jsonParser, (req, res) => {
   var newActivity = new Activity(req.body);
   newActivity.save((err, data) => {
     if (err) return handleDBError(err, res);
@@ -22,7 +21,7 @@ activityRouter.post('/activities', jsonParser, (req, res) => {
   });
 });
 
-activityRouter.put('/activities/:id', jsonParser, (req, res) => {
+activityRouter.put('/:id', jsonParser, (req, res) => {
   var activityData = req.body;
   delete activityData._id;
   Activity.update({_id: req.params.id}, activityData, (err) => {
@@ -32,7 +31,7 @@ activityRouter.put('/activities/:id', jsonParser, (req, res) => {
   });
 });
 
-activityRouter.delete('/activities/:id', (req, res) => {
+activityRouter.delete('/:id', (req, res) => {
   Activity.remove({_id: req.params.id}, (err) => {
     if (err) return handleDBError(err, res);
 
