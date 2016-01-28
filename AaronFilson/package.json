@@ -7,8 +7,11 @@
     "test": "test"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.2",
     "express": "^4.13.3",
-    "body-parser": "^1.14.2"
+    "jsonwebtoken": "^5.5.4",
+    "mongoose": "^4.3.7"
   },
   "devDependencies": {
     "chai": "^3.4.1",
