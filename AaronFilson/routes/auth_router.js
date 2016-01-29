@@ -7,10 +7,9 @@ const basicHTTP = require(__dirname + '/../lib/basic_http');
 var authRouter = module.exports = exports = express.Router();
 
 authRouter.post('/signup', jsonParser, (req, res) => {
-  debugger;
-  var newUser = new User();
 
-  if(!((req.body.email || '').length && (req.body.password || '').length > 7)){
+  var newUser = new User();
+  if(!((req.body.email || '').length && (req.body.password || '').length > 3)){
     return res.status(401).json({msg: 'invalid username or password'});
   }
 
@@ -25,7 +24,7 @@ authRouter.post('/signup', jsonParser, (req, res) => {
 });
 
 authRouter.post('/signin', basicHTTP, (req, res) => {
-  console.log('in sign in route');
+
   User.findOne({'authentication.email': req.basicHTTP.email}, (err, user) => {
     if(err) {
       console.log(err);

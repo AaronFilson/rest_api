@@ -1,7 +1,7 @@
 const zeroBuffer = require(__dirname + '/zero_buffer.js');
 
 module.exports = exports = function(req, res, next){
-  console.log('in basic http module');
+
   try{
     var authString = req.headers.authorization;
     var base64String = authString.split(' ')[1];

@@ -2,10 +2,11 @@ const User = require(__dirname + '/../models/user');
 const jwt = require('jsonwebtoken');
 
 module.exports = exports = function (req, res, next) {
-  console.log('in the jwt_auth module');
+
   var decoded;
   try{
     decoded = jwt.verify(req.headers.token, process.env.APP_SECRET || 'ChangeMe');
+
   } catch (e){
     return res.status(401).json({msg: 'Authenication failed.'});
   }

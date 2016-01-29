@@ -12,10 +12,6 @@ var PORT = process.env.PORT || 3050;
 var apploc = 'localhost:' + PORT;
 
 describe('the activity api', () => {
-  // before((done) => {
-  //   console.log("This is the before section, where we could do stuff if needed.");
-  //   done();
-  // });
 
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
