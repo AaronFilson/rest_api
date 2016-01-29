@@ -8,10 +8,6 @@ const server = require(__dirname + '/../server');
 const Playlist = require(__dirname + '/../models/playlist');
 
 describe('the playlist api', () => {
-  before((done) => {
-    console.log("This is the before section, where we could do stuff if needed.");
-    done();
-  });
 
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {

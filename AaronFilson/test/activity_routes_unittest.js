@@ -2,16 +2,16 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 const expect = chai.expect;
+const request = chai.request;
 const mongoose = require('mongoose');
 process.env.MONGOLAB_URI = 'mongodb://localhost/activity_app_test';
 const server = require(__dirname + '/../server');
 const Activity = require(__dirname + '/../models/activity');
 
+var PORT = process.env.PORT || 3050;
+var apploc = 'localhost:' + PORT;
+
 describe('the activity api', () => {
-  before((done) => {
-    console.log("This is the before section, where we could do stuff if needed.");
-    done();
-  });
 
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
@@ -20,7 +20,7 @@ describe('the activity api', () => {
   });
 
   it('should be able to retrieve all our activities', (done) => {
-    chai.request('localhost:3050')
+    request(apploc)
       .get('/api/activity')
       .end((err, res) => {
         expect(err).to.eql(null);
@@ -30,7 +30,7 @@ describe('the activity api', () => {
   });
 
   it('should create a activity with a POST', (done) => {
-    chai.request('localhost:3050')
+    request(apploc)
       .post('/api/activity')
       .send({name: 'test activity'})
       .end(function(err, res) {
@@ -51,7 +51,7 @@ describe('the activity api', () => {
     });
 
     it('should be able to update a activity', (done) => {
-      chai.request('localhost:3050')
+      request(apploc)
         .put('/api/activity/' + this.testactivity._id)
         .send({name: 'new activity name'})
         .end((err, res) => {
@@ -63,7 +63,7 @@ describe('the activity api', () => {
     });
 
     it('should be able to delete a activity', (done) => {
-      chai.request('localhost:3050')
+      request(apploc)
         .delete('/api/activity/' + this.testactivity._id)
         .end((err, res) => {
           expect(err).to.eql(null);
