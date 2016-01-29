@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/mix_dev');
 const mixRouter = require(__dirname + '/routes/mixRouter');
 const authRouter = require(__dirname + '/routes/auth_router');
 
-//app.use('/api', mixRouter);
+app.use('/api', mixRouter);
 app.use('/api', authRouter);
 
 
