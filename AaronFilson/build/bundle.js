@@ -66,8 +66,8 @@
 	        $scope.newAct = null;
 	      }, (err) => {
 	        console.log(err);
-	      })
-	  }
+	      });
+	  };
 
 	  $scope.deleteActivity = function(act) {
 	    $http.delete('http://localhost:3050/api/activity/' + act._id)
@@ -75,8 +75,8 @@
 	        $scope.activity = $scope.activity.filter((i) => i !== act);
 	      }, (err) => {
 	        console.log(err)
-	      })
-	  }
+	      });
+	  };
 
 	  $scope.updateActivity = function(act) {
 	    $http.put('http://localhost:3050/api/activity/' + act._id, act)
@@ -86,8 +86,8 @@
 	      }, (err) => {
 	        console.log(err);
 	        myAct.editting = false;
-	      })
-	  }
+	      });
+	  };
 	}]);
 
 
