@@ -36,10 +36,10 @@ activityApp.controller('activityController', ['$scope', '$http', ($scope, $http)
     $http.put('http://localhost:3050/api/activity/' + act._id, act)
       .then((res) => {
         $scope.activity[$scope.activity.indexOf(act)] = act;
-        myAct.editting = false;
+        act.editting = false;
       }, (err) => {
         console.log(err);
-        myAct.editting = false;
+        act.editting = false;
       });
   };
 }]);

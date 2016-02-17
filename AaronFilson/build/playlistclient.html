@@ -16,15 +16,15 @@
               <button data-ng-click="deletePlaylist(myPlist)">Delete This Playlist</button>
               <button data-ng-click="myPlist.editting = !myPlist.editting">Update This Playlist</button>
               <form data-ng-if="myPlist.editting" data-ng-submit="updatePlaylist(myPlist)">
-                Playlist Name : <input data-ng-model="myPlist.name" type="text"/>
-                DJ : <input data-ng-model="myPlist.dj" type="text"/>
+                <input data-ng-model="myPlist.name" type="text"/>
+                <input data-ng-model="myPlist.dj" type="text"/>
                 <button type="submit">Update</button>
               </form>
             </li>
           </ul>
           <form data-ng-submit="createPlaylist(newPlist)">
             <input data-ng-model="newPlist.name" type="text"/>
-            <input data-ng-model="newPlist.shoes" type="text"/>
+            <input data-ng-model="newPlist.dj" type="text"/>
             <button type="submit">New Playlist</button>
           </form>
           <p>{{playlist}}</p>
@@ -36,50 +36,49 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script type="text/javascript">
 
-    const playlistApp = angular.module('playlistApp', []);
+      var playlistApp = angular.module('playlistApp', []);
 
-    playlistApp.controller('playlistController', ['$scope', '$http', ($scope, $http) => {
-      $scope.playlist = [];
+      playlistApp.controller('playlistController', ['$scope', '$http', ($scope, $http) => {
+        $scope.playlist = [];
 
-      $http.get('http://localhost:3050/api/playlist')
-        .then((res) => {
-          console.log('success!');
-          $scope.playlist = res.data;
-        }, (err) => {
-          console.log(err);
-        });
-
-      $scope.createPlaylist = function(plist) {
-        $http.post('http://localhost:3050/api/playlist', plist)
+        $http.get('http://localhost:3050/api/playlist')
           .then((res) => {
-            $scope.playlist.push(res.data);
-            $scope.newPlist = null;
+            console.log('success!');
+            $scope.playlist = res.data;
           }, (err) => {
             console.log(err);
           });
-      };
 
-      $scope.deletePlaylist = function(plist) {
-        $http.delete('http://localhost:3050/api/playlist/' + plist._id)
-          .then((res) => {
-            $scope.playlist = $scope.playlist.filter((i) => i !== plist);
-          }, (err) => {
-            console.log(err);
-          });
-      };
+        $scope.createPlaylist = function(plist) {
+          $http.post('http://localhost:3050/api/playlist', plist)
+            .then((res) => {
+              $scope.playlist.push(res.data);
+              $scope.newPlist = null;
+            }, (err) => {
+              console.log(err);
+            });
+        };
 
-      $scope.updatePlaylist = function(plist) {
-        $http.put('http://localhost:3050/api/playlist/' + plist._id, plist)
-          .then((res) => {
-            $scope.playlist[$scope.playlist.indexOf(plist)] = plist;
-            myPlist.editting = false;
-          }, (err) => {
-            console.log(err);
-            myPlist.editting = false;
-          });
-      };
-    }]);
+        $scope.deletePlaylist = function(plist) {
+          $http.delete('http://localhost:3050/api/playlist/' + plist._id)
+            .then((res) => {
+              $scope.playlist = $scope.playlist.filter((i) => i !== plist);
+            }, (err) => {
+              console.log(err);
+            });
+        };
 
+        $scope.updatePlaylist = function(plist) {
+          $http.put('http://localhost:3050/api/playlist/' + plist._id, plist)
+            .then((res) => {
+              $scope.playlist[$scope.playlist.indexOf(plist)] = plist;
+              plist.editting = false;
+            }, (err) => {
+              console.log(err);
+              plist.editting = false;
+            });
+        };
+      }]);
     </script>
   </body>
 </html>
