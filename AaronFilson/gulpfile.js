@@ -1,7 +1,25 @@
-var gulp = require('gulp');
-var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
-var gutil = require('gulp-util');
+const gulp = require('gulp');
+const eslint = require('gulp-eslint');
+const mocha = require('gulp-mocha');
+const gutil = require('gulp-util');
+const webpack = require('webpack-stream');
+
+gulp.task('html:dev', () => {
+  gulp.src(__dirname + '/app/**/*.html')
+    .pipe(gulp.dest(__dirname + '/build'));
+});
+
+gulp.task('webpack:dev', () => {
+  gulp.src(__dirname + '/app/js/client.js')
+    .pipe(webpack({
+      output: {
+        filename: 'bundle.js'
+      }
+    }))
+    .pipe(gulp.dest('build/'));
+});
+
+gulp.task('build:dev', ['webpack:dev', 'html:dev']);
 
 gulp.task('mocha', function() {
   return gulp.src(['test/**/*test.js'], { read: false })
