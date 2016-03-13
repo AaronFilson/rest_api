@@ -15,7 +15,7 @@ authRouter.post('/signup', jsonParser, (req, res) => {
   }
 
   debugger;
-  newUser.username = req.body.signupname;
+  newUser.username = req.body.signupname || req.body.email;
   newUser.authentication.email = req.body.email;
   newUser.hashPassword(req.body.password);
   newUser.save((err, data) => {
