@@ -3,6 +3,7 @@ const User = require(__dirname + '/../models/user');
 const jsonParser = require('body-parser').json();
 const handleDBError = require(__dirname + '/../lib/handleDBError');
 const basicHTTP = require(__dirname + '/../lib/basic_http');
+const jwtLib = require(__dirname + '/../lib/jwt_auth');
 
 var authRouter = module.exports = exports = express.Router();
 
@@ -13,7 +14,8 @@ authRouter.post('/signup', jsonParser, (req, res) => {
     return res.status(401).json({msg: 'invalid username or password'});
   }
 
-  newUser.username = req.body.username || req.body.email;
+  debugger;
+  newUser.username = req.body.signupname;
   newUser.authentication.email = req.body.email;
   newUser.hashPassword(req.body.password);
   newUser.save((err, data) => {
@@ -38,3 +40,9 @@ authRouter.post('/signin', basicHTTP, (req, res) => {
     res.json({token: user.generateToken()}); //no failures, so send back a token
   });
 });
+
+authRouter.get('/currentuser', jwtLib, (req, res) => {
+  var temp = req.user.username || '';
+  res.status(200).json({user: req.user.username});
+});
+
